@@ -9,11 +9,23 @@ y = np.array([2, 5, 7, 9, 10, 13, 16, 18, 21, 22, 21, 20, 19, 18,
               17, 14, 10, 9, 7, 5, 7, 9, 10, 12, 13, 15, 16, 17, 22, 27])
 
 # Simple interpolation of x and y
+# 插值，即依据一系列的点(xi,yi)通过一定的算法找到一个合适的函数来包含(逼近)这些点，反应出这些点的走势规律。
 f = interp1d(x, y)
 x_fake = np.arange(1.1, 30, 0.1)
 
 # derivative of y with respect to x
 df_dx = derivative(f, x_fake, dx=1e-6)
+
+print(df_dx)
+for i in range(0, len(df_dx) - 2):
+    if df_dx[i] > 0 and df_dx[i + 1] < 0:
+        print(i)
+        print(df_dx[i])
+        print(df_dx[i+1])
+    if df_dx[i] < 0 and df_dx[i + 1] > 0:
+        print(i)
+        print(df_dx[i])
+        print(df_dx[i+1])
 
 # Plot
 fig = plt.figure()
